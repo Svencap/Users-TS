@@ -4,8 +4,10 @@ import { Container } from "@mui/material";
 import Navbar from "./Navbar";
 import { Box } from "@mui/system";
 import UsersList from "./UsersList";
+import UserEdit from "./UserEdit";
 import { useAppDispatch } from "../Redux/hooks";
 import { fetchGetUsers } from "../Redux/slices/usersSlice";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -14,10 +16,15 @@ function App() {
   }, []);
 
   return (
-      <Box sx={{ height: '100%', display: 'flex' }}>
+    <BrowserRouter>
+      <Box sx={{ height: "100%", display: "flex" }}>
         <Navbar />
-        <UsersList />
+        <Routes>
+          <Route path="/" element={<UsersList />} />
+          <Route path=":id" element={<UserEdit />} />
+        </Routes>
       </Box>
+    </BrowserRouter>
   );
 }
 

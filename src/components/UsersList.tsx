@@ -1,12 +1,16 @@
 import UserCard from "./UserCard";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Skeleton } from "@mui/material";
 import { useSelector } from "react-redux";
 import { usersSelectors } from "../Redux/slices/usersSlice";
+import { loadingSelector } from "../Redux/slices/usersSlice";
 
 const UsersList = () => {
 
+  const isLoad = useSelector(loadingSelector);
+
   const users = useSelector(usersSelectors.selectAll);
 
+  console.log(isLoad);
   return (
     <Box
       sx={{
@@ -23,6 +27,7 @@ const UsersList = () => {
       {users.map((user: any) => (
         <UserCard
           key={user.id}
+          id={user.id}
           name={user.name}
           city={user.address.city}
           company={user.company.name}
